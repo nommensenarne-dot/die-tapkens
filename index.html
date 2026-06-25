@@ -1,98 +1,148 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Für Nils & Ines</title>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      font-family: Georgia, 'Times New Roman', serif;
+      font-family: Georgia, "Times New Roman", serif;
       background: #f7f1ea;
       color: #2f2a26;
     }
 
     .hero {
       min-height: 100vh;
+      position: relative;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
-      padding: 32px;
-
-      background:
-        linear-gradient(
-          rgba(255,255,255,0.15),
-          rgba(255,255,255,0.35)
-        ),
-        url("titelild.jpeg");
-
-      background-size: cover;
-      background-position: center center;
-      background-repeat: no-repeat;
+      justify-content: center;
+      padding: 24px;
+      overflow: hidden;
       text-align: center;
     }
 
+    .slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0;
+      transition: opacity 1.6s ease-in-out;
+      z-index: 0;
+    }
+
+    .slide.active {
+      opacity: 1;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        rgba(255, 255, 255, 0.08),
+        rgba(255, 255, 255, 0.32)
+      );
+      z-index: 1;
+    }
+
     .card {
-      max-width: 620px;
-      margin-left: 7vw;
-      
-      background: rgba(255,255,255,0.60);
+      position: relative;
+      z-index: 2;
+      width: min(92vw, 640px);
+      background: rgba(255, 255, 255, 0.64);
       backdrop-filter: blur(8px);
-      
-      border: 1px solid rgba(255,255,255,0.35);
-      
-      padding: 48px 32px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      padding: 42px 28px;
       border-radius: 28px;
-      
-      box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.16);
     }
 
     .small {
       letter-spacing: 3px;
       text-transform: uppercase;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: #8a6f5a;
     }
 
     h1 {
-      font-size: 3rem;
-      margin: 16px 0;
+      font-size: clamp(2.3rem, 8vw, 4.2rem);
+      margin: 14px 0;
       font-weight: normal;
     }
 
+    h2 {
+      font-size: clamp(1.7rem, 5vw, 2.4rem);
+      font-weight: normal;
+      margin: 0 0 20px;
+    }
+
     .date {
-      font-size: 1.2rem;
-      margin-bottom: 32px;
+      font-size: 1.15rem;
+      margin-bottom: 28px;
       color: #6f5b49;
     }
 
     p {
-      font-size: 1.15rem;
+      font-size: 1.12rem;
       line-height: 1.7;
     }
 
-    .video-section {
-      max-width: 900px;
+    .button {
+      display: inline-block;
+      margin-top: 22px;
+      padding: 14px 24px;
+      border-radius: 999px;
+      background: rgba(47, 42, 38, 0.9);
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .section {
+      max-width: 920px;
       margin: 64px auto;
-      padding: 0 24px;
+      padding: 0 22px;
       text-align: center;
     }
 
-    video {
+    .video-wrapper {
+      position: relative;
       width: 100%;
-      border-radius: 24px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.14);
+      aspect-ratio: 16 / 9;
+      border-radius: 26px;
+      overflow: hidden;
+      box-shadow: 0 22px 65px rgba(0, 0, 0, 0.18);
       background: #000;
+    }
+
+    .video-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
     }
 
     .message {
       max-width: 760px;
       margin: 64px auto;
-      padding: 40px 28px;
+      padding: 42px 30px;
       background: white;
-      border-radius: 24px;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+      border-radius: 26px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
       text-align: center;
     }
 
@@ -103,17 +153,40 @@
       font-size: 0.95rem;
     }
 
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 2.2rem;
+    @media (max-width: 700px) {
+      .hero {
+        min-height: 92vh;
+        padding: 18px;
       }
 
       .card {
-        padding: 36px 24px;
+        padding: 30px 20px;
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.70);
+      }
+
+      .small {
+        font-size: 0.68rem;
+        letter-spacing: 2px;
+      }
+
+      .date {
+        font-size: 1rem;
+        margin-bottom: 22px;
       }
 
       p {
-        font-size: 1.05rem;
+        font-size: 1.02rem;
+      }
+
+      .section {
+        margin: 46px auto;
+        padding: 0 16px;
+      }
+
+      .message {
+        margin: 46px 16px;
+        padding: 30px 20px;
       }
     }
   </style>
@@ -121,30 +194,39 @@
 
 <body>
 
-  <section class="hero">
+  <section class="hero" id="start">
+    <div class="slide active"></div>
+    <div class="slide"></div>
+
     <div class="card">
       <div class="small">Ein kleines Geschenk für</div>
       <h1>Nils & Ines</h1>
       <div class="date">Familie Tapken</div>
 
       <p>
-        Lieber Nils, liebe Ines,<br>
+        Lieber Nils, liebe Ines,<br />
         schön, dass ihr diesen kleinen digitalen Teil eures Geschenks gefunden habt.
       </p>
 
       <p>
         Wir wünschen euch von Herzen alles Liebe für euren gemeinsamen Weg.
       </p>
+
+      <a class="button" href="#video">Unsere Botschaft ansehen</a>
     </div>
   </section>
 
-  <section class="video-section">
+  <section class="section" id="video">
     <h2>Eine Botschaft für euch</h2>
 
-    <video controls>
-      <source src="video.mp4" type="video/mp4">
-      Dein Browser unterstützt dieses Video leider nicht.
-    </video>
+    <div class="video-wrapper">
+      <iframe
+        src="https://player.vimeo.com/video/1204490977"
+        title="Videobotschaft für Nils und Ines"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
   </section>
 
   <section class="message">
@@ -164,6 +246,44 @@
   <div class="footer">
     Mit Liebe gemacht – für Nils & Ines
   </div>
+
+  <script>
+    const images = [
+      "bild1.jpeg",
+      "bild2.jpeg",
+      "bild3.jpeg",
+      "bild4.jpeg",
+      "bild5.jpeg",
+      "bild6.jpeg",
+      "bild7.jpeg",
+      "bild8.jpeg",
+      "bild9.jpeg",
+      "bild10.jpeg",
+      "bild11.jpeg",
+      "bild12.jpeg",
+      "bild13.jpeg",
+      "bild14.jpeg"
+    ];
+
+    const slides = document.querySelectorAll(".slide");
+    let currentImage = 0;
+    let activeSlide = 0;
+
+    function showNextImage() {
+      const nextSlide = activeSlide === 0 ? 1 : 0;
+      slides[nextSlide].style.backgroundImage = `url("${images[currentImage]}")`;
+      slides[nextSlide].classList.add("active");
+      slides[activeSlide].classList.remove("active");
+
+      activeSlide = nextSlide;
+      currentImage = (currentImage + 1) % images.length;
+    }
+
+    slides[0].style.backgroundImage = `url("${images[0]}")`;
+    currentImage = 1;
+
+    setInterval(showNextImage, 5500);
+  </script>
 
 </body>
 </html>

@@ -22,12 +22,12 @@
     }
 
     .hero {
-      min-height: 100vh;
+      min-height: 92vh;
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 24px;
+      padding: 22px;
       overflow: hidden;
       text-align: center;
     }
@@ -39,7 +39,9 @@
       background-position: center;
       background-repeat: no-repeat;
       opacity: 0;
-      transition: opacity 1.6s ease-in-out;
+      transform: scale(1);
+      transition: opacity 1.8s ease-in-out;
+      animation: kenburns 10s ease-in-out infinite alternate;
       z-index: 0;
     }
 
@@ -47,13 +49,22 @@
       opacity: 1;
     }
 
+    @keyframes kenburns {
+      from {
+        transform: scale(1);
+      }
+      to {
+        transform: scale(1.07);
+      }
+    }
+
     .hero::after {
       content: "";
       position: absolute;
       inset: 0;
       background: linear-gradient(
-        rgba(255, 255, 255, 0.08),
-        rgba(255, 255, 255, 0.32)
+        rgba(255,255,255,0.06),
+        rgba(255,255,255,0.28)
       );
       z-index: 1;
     }
@@ -62,107 +73,155 @@
       position: relative;
       z-index: 2;
       width: min(92vw, 640px);
-      background: rgba(255, 255, 255, 0.64);
+      background: rgba(255,255,255,0.66);
       backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      padding: 42px 28px;
+      border: 1px solid rgba(255,255,255,0.42);
+      padding: 36px 24px;
       border-radius: 28px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.16);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.16);
     }
 
     .small {
       letter-spacing: 3px;
       text-transform: uppercase;
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       color: #8a6f5a;
     }
 
     h1 {
-      font-size: clamp(2.3rem, 8vw, 4.2rem);
+      font-size: clamp(2.4rem, 10vw, 4.4rem);
       margin: 14px 0;
       font-weight: normal;
     }
 
     h2 {
-      font-size: clamp(1.7rem, 5vw, 2.4rem);
+      font-size: clamp(1.8rem, 6vw, 2.5rem);
       font-weight: normal;
-      margin: 0 0 20px;
+      margin: 0 0 22px;
     }
 
     .date {
-      font-size: 1.15rem;
-      margin-bottom: 28px;
+      font-size: 1.1rem;
+      margin-bottom: 26px;
       color: #6f5b49;
     }
 
     p {
-      font-size: 1.12rem;
+      font-size: 1.08rem;
       line-height: 1.7;
-    }
-
-    .button {
-      display: inline-block;
-      margin-top: 22px;
-      padding: 14px 24px;
-      border-radius: 999px;
-      background: rgba(47, 42, 38, 0.9);
-      color: white;
-      text-decoration: none;
-      font-size: 1rem;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
     }
 
     .section {
       max-width: 920px;
-      margin: 64px auto;
-      padding: 0 22px;
+      margin: 56px auto;
+      padding: 0 18px;
       text-align: center;
     }
 
     .video-wrapper {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      border-radius: 26px;
+      width: min(420px, 92vw);
+      margin: 0 auto;
+      aspect-ratio: 9 / 16;
+      border-radius: 28px;
       overflow: hidden;
-      box-shadow: 0 22px 65px rgba(0, 0, 0, 0.18);
+      box-shadow: 0 22px 65px rgba(0,0,0,0.18);
       background: #000;
     }
 
-    .video-wrapper iframe {
+    .video-wrapper video {
       width: 100%;
       height: 100%;
-      border: 0;
+      object-fit: cover;
       display: block;
     }
 
     .message {
       max-width: 760px;
-      margin: 64px auto;
-      padding: 42px 30px;
+      margin: 56px auto;
+      padding: 38px 26px;
       background: white;
       border-radius: 26px;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
       text-align: center;
+    }
+
+    .gallery {
+      max-width: 900px;
+      margin: 56px auto;
+      padding: 0 18px;
+      text-align: center;
+    }
+
+    .gallery-frame {
+      position: relative;
+      width: min(760px, 94vw);
+      margin: 0 auto;
+      aspect-ratio: 4 / 5;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 18px 55px rgba(0,0,0,0.16);
+      background: #eee;
+    }
+
+    .gallery-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .gallery-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      margin-top: 18px;
+      color: #6f5b49;
+    }
+
+    .gallery-controls button {
+      border: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: #2f2a26;
     }
 
     .footer {
       text-align: center;
-      padding: 48px 24px;
+      padding: 46px 24px;
       color: #8a6f5a;
       font-size: 0.95rem;
     }
 
+    @media (min-width: 900px) {
+      .hero {
+        min-height: 100vh;
+      }
+
+      .card {
+        padding: 44px 32px;
+      }
+
+      .gallery-frame {
+        aspect-ratio: 16 / 10;
+      }
+    }
+
     @media (max-width: 700px) {
       .hero {
-        min-height: 92vh;
-        padding: 18px;
+        min-height: 90vh;
+        padding: 16px;
       }
 
       .card {
         padding: 30px 20px;
         border-radius: 24px;
-        background: rgba(255, 255, 255, 0.70);
+        background: rgba(255,255,255,0.70);
       }
 
       .small {
@@ -179,14 +238,19 @@
         font-size: 1.02rem;
       }
 
-      .section {
-        margin: 46px auto;
+      .section,
+      .gallery {
+        margin: 44px auto;
         padding: 0 16px;
       }
 
       .message {
-        margin: 46px 16px;
+        margin: 44px 16px;
         padding: 30px 20px;
+      }
+
+      .video-wrapper {
+        width: min(390px, 92vw);
       }
     }
   </style>
@@ -194,7 +258,7 @@
 
 <body>
 
-  <section class="hero" id="start">
+  <section class="hero">
     <div class="slide active"></div>
     <div class="slide"></div>
 
@@ -211,21 +275,17 @@
       <p>
         Wir wünschen euch von Herzen alles Liebe für euren gemeinsamen Weg.
       </p>
-
-      <a class="button" href="#video">Unsere Botschaft ansehen</a>
     </div>
   </section>
 
-  <section class="section" id="video">
+  <section class="section">
     <h2>Eine Botschaft für euch</h2>
 
     <div class="video-wrapper">
-      <iframe
-        src="https://player.vimeo.com/video/1204490977"
-        title="Videobotschaft für Nils und Ines"
-        allow="autoplay; fullscreen; picture-in-picture"
-        allowfullscreen>
-      </iframe>
+      <video controls preload="metadata" poster="bild1.jpeg">
+        <source src="videobotschaft.mp4" type="video/mp4" />
+        Dein Browser unterstützt dieses Video leider nicht.
+      </video>
     </div>
   </section>
 
@@ -241,6 +301,20 @@
       Auf viele gemeinsame Jahre, viele kleine und große Abenteuer
       und ein Zuhause voller Liebe, Lachen und guter Geschichten.
     </p>
+  </section>
+
+  <section class="gallery">
+    <h2>Ein paar Erinnerungen</h2>
+
+    <div class="gallery-frame">
+      <img id="galleryImage" src="bild1.jpeg" alt="Erinnerung von Nils und Ines" />
+    </div>
+
+    <div class="gallery-controls">
+      <button onclick="previousImage()">‹</button>
+      <span id="galleryCounter">Bild 1 / 14</span>
+      <button onclick="nextImage()">›</button>
+    </div>
   </section>
 
   <div class="footer">
@@ -266,23 +340,43 @@
     ];
 
     const slides = document.querySelectorAll(".slide");
-    let currentImage = 0;
+    let currentHeroImage = 0;
     let activeSlide = 0;
 
-    function showNextImage() {
+    slides[0].style.backgroundImage = `url("${images[0]}")`;
+
+    function showNextHeroImage() {
+      currentHeroImage = (currentHeroImage + 1) % images.length;
       const nextSlide = activeSlide === 0 ? 1 : 0;
-      slides[nextSlide].style.backgroundImage = `url("${images[currentImage]}")`;
+
+      slides[nextSlide].style.backgroundImage = `url("${images[currentHeroImage]}")`;
       slides[nextSlide].classList.add("active");
       slides[activeSlide].classList.remove("active");
 
       activeSlide = nextSlide;
-      currentImage = (currentImage + 1) % images.length;
     }
 
-    slides[0].style.backgroundImage = `url("${images[0]}")`;
-    currentImage = 1;
+    setInterval(showNextHeroImage, 8000);
 
-    setInterval(showNextImage, 5500);
+    let currentGalleryImage = 0;
+    const galleryImage = document.getElementById("galleryImage");
+    const galleryCounter = document.getElementById("galleryCounter");
+
+    function updateGallery() {
+      galleryImage.src = images[currentGalleryImage];
+      galleryCounter.textContent = `Bild ${currentGalleryImage + 1} / ${images.length}`;
+    }
+
+    function nextImage() {
+      currentGalleryImage = (currentGalleryImage + 1) % images.length;
+      updateGallery();
+    }
+
+    function previousImage() {
+      currentGalleryImage =
+        (currentGalleryImage - 1 + images.length) % images.length;
+      updateGallery();
+    }
   </script>
 
 </body>
